@@ -1,123 +1,117 @@
 <template>
-  <div>
-    <div id="" class="container-fluid">
-      <!-- Background animtion-->
-      <div class="background">
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-      </div>
-      <!-- header -->
-      <header>
-        <div class="logo"><span>N</span></div>
-        <!-- title & content -->
-        <section class="header-content">
-          <div class="container py-2">
-            <div class="row d-flex align-items-center justify-content-center">
-              <div class="col-md-8 col-lg-7 col-xl-6">
-                <img
-                  src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-                  class="img-fluid"
-                  alt="Phone image"
-                />
+  <div class="container-fluid">
+    <!-- Background animtion-->
+    <div class="background">
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+    </div>
+    <!-- header -->
+    <header>
+      <div class="logo"><span>N</span></div>
+      <!-- title & content -->
+      <section class="header-content">
+        <div class="container py-2">
+          <div class="row d-flex align-items-center justify-content-center">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+              <img
+                src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                class="img-fluid"
+                alt="Phone image"
+              />
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+              <div class="mb-4">
+                <h1 class="welcome-title">Welcome</h1>
               </div>
-              <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                <div class="mb-4">
-                  <h1>Welcome</h1>
+              <form @submit.prevent="handleLogin" method="POST">
+                <!-- Phone input -->
+                <a-form-item
+                  :validateStatus="
+                    $v.phone.$error && $v.phone.$dirty ? 'error' : ''
+                  "
+                  :help="
+                    $v.phone.$error && $v.phone.$dirty
+                      ? 'Phone number must have at least ' +
+                        $v.phone.$params.minLength.min +
+                        ' numbers.'
+                      : ''
+                  "
+                >
+                  <a-input
+                    v-model.trim="$v.phone.$model"
+                    placeholder="Enter phone number"
+                    type="text"
+                    :class="{
+                      'error-border': $v.phone.$error && $v.phone.$dirty,
+                    }"
+                  />
+                </a-form-item>
+
+                <!-- Password input -->
+                <a-form-item
+                  :validateStatus="
+                    $v.password.$error && $v.password.$dirty ? 'error' : ''
+                  "
+                  :help="
+                    $v.password.$error && $v.password.$dirty
+                      ? 'Password must have at least ' +
+                        $v.password.$params.minLength.min +
+                        ' characters.'
+                      : ''
+                  "
+                >
+                  <a-input-password
+                    v-model.trim="$v.password.$model"
+                    placeholder="Enter password"
+                    :iconRender="(visible) => (visible ? '👁️' : '🙈')"
+                    :class="{
+                      'error-border': $v.password.$error && $v.password.$dirty,
+                    }"
+                  />
+                </a-form-item>
+
+                <div
+                  class="d-flex justify-content-around align-items-center mb-4"
+                >
+                  <!-- Checkbox -->
+                  <a-checkbox style="color: #fff"> Remember me </a-checkbox>
                 </div>
-                <form @submit.prevent="handleLogin" method="POST">
-                  <!-- sđt input -->
-                  <div
-                    class="form-outline mb-4"
-                    :class="{ 'form-group--error': $v.phone.$error }"
-                  >
-                    <input
-                      class="form__input form-control form-control-lg"
-                      placeholder="Mời nhập số điện thoại"
-                      id="form1Example13"
-                      v-model.trim="$v.phone.$model"
-                      type="number"
-                    />
-                  </div>
-                  <!-- <div class="error" v-if="!$v.phone.required">Số điện thoại không đúng.</div> -->
-                  <div class="error" v-if="!$v.phone.minLength">
-                    Phone number must have at least
-                    {{ $v.phone.$params.minLength.min }} number.
-                  </div>
-                  <!-- mật khẩu input -->
-                  <div
-                    class="form-outline mb-4"
-                    :class="{ 'form-group--error': $v.password.$error }"
-                  >
-                    <input
-                      type="password"
-                      class="form__input form-control form-control-lg"
-                      placeholder="Mời nhập mật khẩu"
-                      id="form1Example13"
-                      v-model.trim="$v.password.$model"
-                    />
-                  </div>
-                  <!-- <div class="error" v-if="!$v.password.required">Mật khẩu không đúng.</div> -->
-                  <div class="error" v-if="!$v.password.minLength">
-                    Password must have at least
-                    {{ $v.password.$params.minLength.min }} letters.
-                  </div>
-                  <!-- <button class="button" @click="handleLogin" >Submit!</button> -->
-
-                  <!-- Password input -->
-                  <!-- <div class="form-outline mb-4">
-
-                                    <input type="password" v-model="password" id="form1Example23" placeholder="Mời nhập mật khẩu" class="form-control form-control-lg" />
-
-                                </div> -->
-
-                  <div
-                    class="
-                      d-flex
-                      justify-content-around
-                      align-items-center
-                      mb-4
-                    "
-                  >
-                    <!-- Checkbox -->
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        value=""
-                        id="form1Example3"
-                        checked
-                      />
-                      <label class="form-check-label" for="form1Example3">
-                        Remember me
-                      </label>
-                    </div>
-                  </div>
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-lg btn-block"
-                    :disabled="submitStatus === 'PENDING'"
-                  >
-                    Sign in
-                  </button>
-                  <p class="typo__p" v-if="submitStatus === 'OK'">
-                    Thanks for your submission!
-                  </p>
-                  <p class="typo__p" v-if="submitStatus === 'ERROR'">
-                    Phone number or password is wrong!
-                  </p>
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">
-                    Sending...
-                  </p>
-                </form>
-              </div>
+                <a-button
+                  type="primary"
+                  html-type="submit"
+                  :loading="submitStatus === 'PENDING'"
+                  block
+                  class="signin-button"
+                >
+                  Sign in
+                </a-button>
+                <p class="typo__p" v-if="submitStatus === 'OK'">
+                  Thanks for your submission!
+                </p>
+                <p class="typo__p" v-if="submitStatus === 'PENDING'">
+                  Sending...
+                </p>
+              </form>
             </div>
           </div>
-        </section>
-      </header>
-    </div>
+        </div>
+      </section>
+      <div>
+        <a-modal
+          v-model="errorModalVisible"
+          title="Error"
+          okText="OK"
+          centered
+          @ok="errorModalVisible = false"
+          class="error-modal"
+        >
+          <p>Phone number or password is incorrect!</p>
+        </a-modal>
+      </div>
+    </header>
   </div>
 </template>
 
@@ -132,6 +126,7 @@ export default {
       phone: "",
       password: "",
       submitStatus: null,
+      errorModalVisible: false,
     };
   },
   head: {
@@ -157,7 +152,7 @@ export default {
       this.$v.$touch();
       if (this.$v.$invalid) {
         this.submitStatus = "ERROR";
-        alert("Phone number or password is wrong!");
+        this.errorModalVisible = true;
       } else {
         event.preventDefault();
         const response = await axios.post(
@@ -195,10 +190,58 @@ export default {
   background: #fff;
 }
 
+.error-border {
+  border-color: red !important;
+}
+
+.welcome-title {
+  font-size: 3em;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1.5em;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.error-modal {
+  text-align: center;
+}
+
+.error-modal .ant-modal-content {
+  background-color: #f5222d;
+  color: #fff;
+}
+
+.error-modal .ant-modal-header,
+.error-modal .ant-modal-footer {
+  border: none;
+}
+
+.error-modal .ant-modal-title {
+  color: #fff;
+}
+
+.error-modal .ant-modal-footer {
+  text-align: center;
+}
+
+.error-modal .ant-modal-footer .ant-btn-primary {
+  background-color: #f5222d;
+  border-color: #f5222d;
+}
+
+.error-modal .ant-modal-footer .ant-btn-primary:hover {
+  background-color: #ff4d4f;
+  border-color: #ff4d4f;
+}
+
 /* ============= Animation background ========= */
 
 .background {
   background: linear-gradient(132deg, #fc415a, #591bc5, #212335);
+  /* background: #ffff; */
   background-size: 400% 400%;
   animation: Gradient 15s ease infinite;
   position: relative;
@@ -345,21 +388,27 @@ nav ul li:hover {
 }
 
 .header-content button {
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  font-size: 16px;
   width: 140px;
   margin: 20px 10px;
   color: #591bc5;
   font-size: 17px;
-  border: 1px solid #efeef5;
-  font-weight: 500;
-  background: #efeef5;
+  border: 2px solid #efeef5;
+  font-weight: bold;
+  background: aquamarine;
   border-radius: 20px;
   padding: 10px;
   cursor: pointer;
   transition: 0.3s;
+  padding-bottom: 33px;
 }
 
 .header-content button:hover {
-  border-radius: 0;
+  background: cyan;
+  color: #591bc5;
 }
 
 /* Animate Background*/
