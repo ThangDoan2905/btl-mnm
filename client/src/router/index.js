@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Error from "../views/Error.vue";
-import store from "../store";
+import store from "../store"
 Vue.use(VueRouter);
 
 const routes = [
@@ -27,9 +27,9 @@ const routes = [
     component: () => import("../views/Task.vue"),
   },
   {
-    path: "/:match(.*)*",
-    component: Error,
-  },
+    path: '/:match(.*)*',
+    component: Error
+  }
 ];
 
 const router = new VueRouter({
@@ -39,11 +39,12 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.name == "Userlist") {
-    if (store.state.user.auth && store.state.user.role === 0) {
-      return next();
-    } else {
-      next({ path: "/" });
+  if(to.name == "Userlist" ) {
+    if(store.state.user.auth && store.state.user.role === 0){
+      return next()
+    }
+    else {
+      next({path: "/"})
     }
   }
   next();

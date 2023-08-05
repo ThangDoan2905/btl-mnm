@@ -1,8 +1,11 @@
 <template>
   <div class="chatview">
     <div class="header">
-      <img src="http://windows79.com/wp-content/uploads/2021/02/Thay-the-hinh-dai-dien-tai-khoan-nguoi-dung-mac.png"
-        alt="" style="margin-right: 20px" />
+      <img
+        src="http://windows79.com/wp-content/uploads/2021/02/Thay-the-hinh-dai-dien-tai-khoan-nguoi-dung-mac.png"
+        alt=""
+        style="margin-right: 20px"
+      />
       <div>
         <div class="information">
           <div class="name">
@@ -17,21 +20,18 @@
           <b-card title="Collapsible card"> Hello world! </b-card>
         </b-collapse>
       </div>
-      <div v-if="conversion.name && conversion.sender_id == user.id"
-        style="margin-left: 50px; display: flex; position: relative">
+      <div v-if="conversion.name && conversion.sender_id == user.id" style="margin-left: 50px; display: flex; position: relative">
         <button class="btn btn-success" @click="displayAddUser" style="width: 150px">
           {{ showAddUSer ? "Huỷ" : "Thêm thành viên" }}
         </button>
         <!-- <form action=""> -->
-        <input v-if="showAddUSer" type="text" style="margin-left: 50px" v-model="search"
-          @keypress="handleChangeAddUser" />
+        <input v-if="showAddUSer" type="text" style="margin-left: 50px" v-model="search" @keypress="handleChangeAddUser" />
         <div v-if="showAddUSer" class="list-user">
           <div style="display: flex; justify-content: space-between; padding: 4px;" v-for="u in listUser" :key="u._id">
             <div style="width: 100px; height: 35p; text-align: left;">{{ u.name }}</div>
             <div style="width: 55px">
               <button class="add-button" v-if="!u.in" @click="handleAddUser(u._id)">Add</button>
-              <button class="add-button" v-if="u.in && u._id != conversion.sender_id"
-                @click="handleRemoveUser(u._id)">Delete</button>
+              <button class="add-button" v-if="u.in && u._id != conversion.sender_id" @click="handleRemoveUser(u._id)">Delete</button>
             </div>
           </div>
         </div>
@@ -42,8 +42,10 @@
         <div class="list-chat" v-chat-scroll>
           <span v-for="(m, i) in messages" :key="i">
             <!-- <img style="width: 50px; height: 50px;position: absolute;" src="../assets/images/cat.jpg" alt=""> -->
-            <p v-if="m.sender_id != user.id && conversion.type == 'group'"
-              style="margin: 0; text-align: left; margin-left: 10%; font-size: 12px; margin-bottom: -9px">
+            <p
+              v-if="m.sender_id != user.id && conversion.type == 'group'"
+              style="margin: 0; text-align: left; margin-left: 10%; font-size: 12px; margin-bottom: -9px"
+            >
               {{ m.sender_name }}
             </p>
             <div :class="[user.id == m.sender_id ? 'your-text' : 'chat']">
@@ -64,9 +66,19 @@
           <div class="message-footer">
             <div class="message-footer-left">
               <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" style="color: #7d8185" width="24" height="24" viewBox="0 0 24 24"
-                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="feather feather-smile">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  style="color: #7d8185"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-smile"
+                >
                   <circle cx="12" cy="12" r="10"></circle>
                   <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
                   <line x1="9" y1="9" x2="9.01" y2="9"></line>
@@ -77,21 +89,40 @@
                 <input type="text" class="input-content" placeholder="Enter message" v-model="text" />
               </div>
               <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" style="color: #7d8185" width="24" height="24" viewBox="0 0 24 24"
-                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="feather feather-paperclip" @click="handleOpenFile">
-                  <path
-                    d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48">
-                  </path>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  style="color: #7d8185"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-paperclip"
+                  @click="handleOpenFile"
+                >
+                  <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
                 </svg>
                 <input type="file" ref="inputFile" v-show="false" @change="handleImg($event)" />
               </div>
             </div>
             <div class="message-footer-right">
               <button class="message-footer-right-content" type="submit" style="border: none" @click="createMessage">
-                <svg xmlns="http://www.w3.org/2000/svg" style="color: #3390ec" width="24" height="24" viewBox="0 0 24 24"
-                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="feather feather-send">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  style="color: #3390ec"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-send"
+                >
                   <line x1="22" y1="2" x2="11" y2="13"></line>
                   <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                 </svg>
@@ -341,11 +372,9 @@ export default {
   border-radius: 100%;
   margin-left: 10%;
 }
-
 .boxchat .message-footer .message-footer-right .message-footer-right-content:hover {
   background-color: #3390ec;
 }
-
 .boxchat .message-footer .message-footer-right .message-footer-right-content svg:hover {
   fill: white;
   color: white;
@@ -394,11 +423,9 @@ export default {
   position: relative;
   /* display: flex; */
 }
-
 .chat-content:hover .time {
   display: block;
 }
-
 .boxchat .boxchat-content .your-text .your-content {
   margin-left: auto;
   width: max-content;
@@ -477,11 +504,9 @@ export default {
 .boxchat .boxchat-content {
   width: 100%;
 }
-
 .content-right {
   text-align: left;
 }
-
 .your-time {
   text-align: right;
   display: none;
@@ -495,17 +520,14 @@ export default {
   box-shadow: 0px 2px 12px -4px black;
   padding: 5px;
 }
-
 .your-content:hover .your-time {
   display: block;
 }
-
 .list-chat {
   /* height: 530px; */
   max-height: 600px;
   overflow-y: scroll;
 }
-
 .list-user {
   /* display: flex; */
   position: absolute;
@@ -519,7 +541,6 @@ export default {
   padding-top: 5px;
   padding-right: 5px;
 }
-
 .add-button {
   border-radius: 5px;
   background: #fff;

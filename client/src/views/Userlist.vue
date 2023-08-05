@@ -12,7 +12,12 @@
         <a-modal v-model="visible" title="Add User" on-ok="handleOk">
           <template slot="footer">
             <a-button key="back" @click="handleCancel"> Return </a-button>
-            <a-button key="submit" type="primary" :loading="loading" @click="handleOk">
+            <a-button
+              key="submit"
+              type="primary"
+              :loading="loading"
+              @click="handleOk"
+            >
               Submit
             </a-button>
           </template>
@@ -28,16 +33,29 @@
       </div>
 
       <div class="ant-table">
-        <a-table :columns="columns" :data-source="users" bordered :pagination="{ pageSize: 5 }">
+        <a-table
+          :columns="columns"
+          :data-source="users"
+          bordered
+          :pagination="{ pageSize: 5 }"
+        >
           <template slot="id" slot-scope="id, record, index">
             {{ index + 1 }}
           </template>
           <template slot="operation" slot-scope="text, record">
             <div class="action">
-              <button v-if="record.role != 0" class="edit" @click="() => handleUpdate(record._id)">
+              <button
+                v-if="record.role != 0"
+                class="edit"
+                @click="() => handleUpdate(record._id)"
+              >
                 Edit
               </button>
-              <button v-if="record.role != 0" class="delete" @click="deleteClick(record._id)">
+              <button
+                v-if="record.role != 0"
+                class="delete"
+                @click="deleteClick(record._id)"
+              >
                 Delete
               </button>
             </div>
@@ -49,7 +67,12 @@
         <a-modal v-model="visibleEdit" title="Edit User" on-ok="handleOk">
           <template slot="footer">
             <a-button key="back" @click="handleCancel"> Return </a-button>
-            <a-button key="submit" type="primary" :loading="loading" @click="handleEditOk">
+            <a-button
+              key="submit"
+              type="primary"
+              :loading="loading"
+              @click="handleEditOk"
+            >
               OK
             </a-button>
           </template>
@@ -249,7 +272,6 @@ export default {
 .ant-menu-item {
   text-align: left !important;
 }
-
 #components-layout-demo-custom-trigger .trigger {
   font-size: 18px;
   line-height: 64px;
@@ -268,36 +290,30 @@ export default {
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
 }
-
 .content {
   /* background-image: url("../assets/images/green.png"); */
   width: 100%;
   height: 100%;
 }
-
 .btn {
   float: right;
   width: 10%;
   margin: 20px 0 20px;
 }
-
 .header {
   width: 100%;
   text-align: center;
   padding-top: 20px;
 }
-
 .ant-table {
   width: 100%;
   margin: auto;
 }
-
 .action {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .edit {
   color: #fff;
   cursor: pointer;
@@ -306,7 +322,6 @@ export default {
   padding: 5px 20px 5px 20px;
   border-radius: 5px;
 }
-
 .delete {
   color: #fff;
   cursor: pointer;
@@ -315,7 +330,6 @@ export default {
   padding: 5px 20px 5px 20px;
   border-radius: 5px;
 }
-
 .input {
   width: 90%;
   border-radius: 5px;

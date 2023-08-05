@@ -24,24 +24,23 @@
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
-        <a-icon class="trigger" style="float: left" :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-          @click="() => (collapsed = !collapsed)" />
+        <a-icon class="trigger" style="float: left" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="() => (collapsed = !collapsed)" />
         <div class="config">
-          <div class="manage">
-            <slot name="name-tab"> </slot>
-          </div>
+          <div class="manage"><slot name="name-tab"> </slot></div>
           <div class="hello">
             Hello {{ user.name }}
             <div class="avatar">{{ user.name.charAt(0) }}</div>
           </div>
         </div>
       </a-layout-header>
-      <a-layout-content :style="{
-        margin: '24px 16px',
-        padding: '24px',
-        background: '#fff',
-        minHeight: '280px',
-      }">
+      <a-layout-content
+        :style="{
+          margin: '24px 16px',
+          padding: '24px',
+          background: '#fff',
+          minHeight: '280px',
+        }"
+      >
         <slot />
       </a-layout-content>
     </a-layout>
@@ -100,11 +99,9 @@ export default {
 section {
   height: 100% !important;
 }
-
 .ant-menu-item {
   text-align: left !important;
 }
-
 #components-layout-demo-custom-trigger .trigger {
   font-size: 18px;
   line-height: 64px;
@@ -123,25 +120,21 @@ section {
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
 }
-
 .config {
   display: flex;
   width: auto;
   justify-content: space-between;
   margin: 0 15px;
 }
-
 .manage {
   font-weight: 500;
   font-size: 20px;
 }
-
 .hello {
   display: flex;
   align-items: center;
   text-transform: uppercase;
 }
-
 .avatar {
   width: 35px;
   height: 35px;

@@ -15,7 +15,7 @@
     </template>
     <template slot="title">
       <div class="header-custom">
-        <h3>Task Infomation</h3>
+        <h3>Task Information</h3>
       </div>
     </template>
     <div class="add-address" v-if="task">
