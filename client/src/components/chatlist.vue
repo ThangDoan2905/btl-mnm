@@ -94,9 +94,9 @@ export default {
       users: [
         {
           image: "../assets/images/cat.jpg",
-          name: "Nguyen",
+          name: "Thang",
           time: "2:39 PM",
-          latestUser: "Manh",
+          latestUser: "Doan",
           latestMessage: "AhihiAhihiAhihiAhihiAhihiAhihiAhihiAhihi",
           unreadMessage: 150,
         },
