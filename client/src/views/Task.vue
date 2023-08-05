@@ -3,26 +3,39 @@
     <div slot="name-tab">Task management</div>
     <div class="task-header">
       <div class="box-search">
-        <input type="text" class="search-ip-custom hover-bt" placeholder="Enter user name or code to search"
-          v-model="search" @keyup="handleSearch" />
+        <input
+          type="text"
+          class="search-ip-custom hover-bt"
+          placeholder="Enter user name or code to search"
+          v-model="search"
+          @keyup="handleSearch"
+        />
         <img src="../assets/images/search.svg" alt="" />
       </div>
       <div class="user-list">
         <div class="user" v-for="i in users" :key="i._id">
-          <div @click="filterUser(i)" class="avatar" :class="{ avatarborder: user_id.find((u) => u == i._id) }"
-            :style="{ backgroundColor: randomColor(i._id) }">
+          <div
+            @click="filterUser(i)"
+            class="avatar"
+            :class="{ avatarborder: user_id.find((u) => u == i._id) }"
+            :style="{ backgroundColor: randomColor(i._id) }"
+          >
             {{ i.name.charAt(0) }}
             <div class="user-name">{{ i.name }}</div>
           </div>
         </div>
       </div>
-      <select style="
+      <select
+        style="
           height: 40px;
           width: 220px;
           font-size: 17px;
           padding-left: 10px;
           border-radius: 5px;
-        " v-model="select" @change="filterPriority">
+        "
+        v-model="select"
+        @change="filterPriority"
+      >
         <option value="" disabled selected>Priority</option>
         <option v-for="i in prioritys" :key="i.value" :value="i">
           {{ i.name }}
@@ -31,27 +44,51 @@
     </div>
     <div class="task-container">
       <draggable v-model="tasks" class="task-list">
-        <div v-for="item in tasks" :key="item.index" class="task-column task-column-on-hold">
+        <div
+          v-for="item in tasks"
+          :key="item.index"
+          class="task-column task-column-on-hold"
+        >
           <span class="task-column-header">
             <h2>{{ item.name }}</h2>
-            <button v-if="item.status == 'todo'" @click="openAddTaskModal" class="add-task">
+            <button
+              v-if="item.status == 'todo'"
+              @click="openAddTaskModal"
+              class="add-task"
+            >
               + Add Task
             </button>
           </span>
-          <draggable :list="item.list" :group="{ name: 'item' }" class="task-inner-list" @change="log(item, $event)">
+          <draggable
+            :list="item.list"
+            :group="{ name: 'item' }"
+            class="task-inner-list"
+            @change="log(item, $event)"
+          >
             <div v-for="i in item.list" :key="i.id" class="task-item">
               <div class="task-action">
-                <div :class="{
-                  taskname: true,
-                  redtext: i.priority == 'high',
-                  yellowtext: i.priority == 'low',
-                }" @click="openTaskInfo(i)">
+                <div
+                  :class="{
+                    taskname: true,
+                    redtext: i.priority == 'high',
+                    yellowtext: i.priority == 'low',
+                  }"
+                  @click="openTaskInfo(i)"
+                >
                   {{ i.name }}
                 </div>
                 <div class="action">
-                  <img style="margin-right: 10px; z-index: 100000" @click="openEditTaskModal(i)"
-                    src="../assets/images/edit.svg" alt="" />
-                  <img @click="deleteClick(i._id)" src="../assets/images/delete.svg" alt="" />
+                  <img
+                    style="margin-right: 10px; z-index: 100000"
+                    @click="openEditTaskModal(i)"
+                    src="../assets/images/edit.svg"
+                    alt=""
+                  />
+                  <img
+                    @click="deleteClick(i._id)"
+                    src="../assets/images/delete.svg"
+                    alt=""
+                  />
                 </div>
               </div>
               <div class="task-info">
@@ -60,16 +97,32 @@
                   <span v-if="i.estimate_time <= 1">day</span>
                   <span v-else>days</span>
                 </div>
-                <div class="assigner" :style="{ backgroundColor: randomColor(i.map_assign._id) }">
+                <div
+                  class="assigner"
+                  :style="{ backgroundColor: randomColor(i.map_assign._id) }"
+                >
                   {{ i.map_assign.name.charAt(0) }}
                 </div>
               </div>
             </div>
           </draggable>
         </div>
-        <taskInfo :task="info" :show="showModal" @hide="openTaskInfo"></taskInfo>
-        <addTask :users="users" :showModal="showAddModal" @hide="openAddTaskModal"></addTask>
-        <editTask :users="users" :showEdit="showEditModal" :taskObject="taskObject" @hide="openEditTaskModal"></editTask>
+        <taskInfo
+          :task="info"
+          :show="showModal"
+          @hide="openTaskInfo"
+        ></taskInfo>
+        <addTask
+          :users="users"
+          :showModal="showAddModal"
+          @hide="openAddTaskModal"
+        ></addTask>
+        <editTask
+          :users="users"
+          :showEdit="showEditModal"
+          :taskObject="taskObject"
+          @hide="openEditTaskModal"
+        ></editTask>
       </draggable>
     </div>
   </layout>
@@ -167,7 +220,7 @@ export default {
               },
             }
           )
-          .then(() => { })
+          .then(() => {})
           .catch((err) => {
             console.error(err);
           });
@@ -278,15 +331,12 @@ ul {
 
 .task-container {
   margin: 20px auto;
-
   .task-list {
     display: flex;
     align-items: flex-start;
-
     @media (max-width: 750px) {
       display: block;
     }
-
     .task-column {
       width: calc(100% / 5 - 20px);
       margin: 0 10px;
@@ -300,10 +350,8 @@ ul {
       @media (max-width: 750px) {
         margin-bottom: 30px;
       }
-
       .task-input {
         padding: 0 0 1rem;
-
         input {
           border: 1px solid #cfd9ea;
           border-top: 0;
@@ -317,19 +365,16 @@ ul {
           outline: none;
           font-family: "Roboto", sans-serif;
           transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-
           &:focus {
             box-shadow: 0px 4px 10px rgba(#cfd9ea, 0.5);
           }
         }
       }
-
       .task-column-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 15px;
-
         h2 {
           font-size: 20px;
           font-weight: 400;
@@ -337,9 +382,7 @@ ul {
           text-transform: uppercase;
         }
       }
-
       &-on-hold {
-
         .task-column-header,
         .is-moved,
         .task-options {
@@ -348,9 +391,7 @@ ul {
           border-radius: 50px;
         }
       }
-
       &-in-progress {
-
         .task-column-header,
         .is-moved,
         .task-options {
@@ -358,9 +399,7 @@ ul {
           color: white;
         }
       }
-
       &-needs-review {
-
         .task-column-header,
         .is-moved,
         .task-options {
@@ -368,9 +407,7 @@ ul {
           color: white;
         }
       }
-
       &-approved {
-
         .task-column-header,
         .is-moved,
         .task-options {
@@ -401,7 +438,6 @@ ul {
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   cursor: pointer;
   margin-right: 5px;
-
   // &:last-child {
   //   margin-bottom: 0;
   // }
@@ -415,29 +451,24 @@ ul {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
   span.task-time {
     font-size: 1.3rem;
     display: inline-block;
     margin-top: 0.5rem;
     color: #566578;
   }
-
   .assigned {
     display: block;
     margin-top: 1rem;
-
     li {
       display: inline-block;
       margin-right: 0.5rem;
-
       img {
         max-width: 20px;
         border-radius: 100%;
       }
     }
   }
-
   .track-task {
     position: absolute;
     top: 1rem;
@@ -447,12 +478,10 @@ ul {
     margin: 0;
     border: none;
     outline: none;
-
     &:hover {
       opacity: 0.6;
     }
   }
-
   &.is-moving {
     cursor: move;
   }
@@ -480,14 +509,12 @@ ul {
 .gu-transit {
   opacity: 0.5;
 }
-
 .add-task {
   background: #4b9efd;
   font-size: 15px;
   color: white;
   border: none;
 }
-
 .task-info {
   display: flex;
   align-items: center;
@@ -495,7 +522,6 @@ ul {
   padding: 0 10px;
   margin-top: 10px;
 }
-
 .assigner {
   width: 35px;
   height: 35px;
@@ -508,14 +534,12 @@ ul {
   margin-left: 10px;
   cursor: pointer;
 }
-
 .task-action {
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
   align-items: center;
 }
-
 .taskname {
   font-weight: bold;
   white-space: nowrap;
@@ -524,30 +548,25 @@ ul {
   width: 135px;
   text-align: start;
 }
-
 .redtext {
   color: red;
 }
-
 .yellowtext {
   color: blue;
 }
-
 .box-search {
   position: relative;
   height: 40px;
   width: 45%;
   margin-right: 8px;
 }
-
-.box-search>img {
+.box-search > img {
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
   left: 25px;
   width: 15px;
 }
-
 .search-ip-custom {
   width: 100%;
   border: 1px solid #c8cdd6;
@@ -560,19 +579,15 @@ ul {
   line-height: 21px;
   color: #27324d;
 }
-
 .search-ip-custom::placeholder {
   color: #c8cdd6;
 }
-
 .user-list {
   display: flex;
   align-items: center;
   margin-left: 20px;
-
   .user {
     margin-left: -10px;
-
     .avatar {
       position: relative;
       width: 45px;
@@ -584,12 +599,10 @@ ul {
       justify-content: center;
       cursor: pointer;
       border: 2px solid white;
-
       .user-name {
         display: none;
       }
-
-      &:hover>.user-name {
+      &:hover > .user-name {
         display: block !important;
         position: absolute;
         bottom: -22px;
@@ -598,17 +611,14 @@ ul {
       }
     }
   }
-
   .user:first-child {
     margin-left: 0 !important;
   }
 }
-
 .avatarborder {
   opacity: 100000;
   border: 3px solid greenyellow !important;
 }
-
 .task-header {
   display: flex;
   align-items: center;
