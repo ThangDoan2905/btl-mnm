@@ -1,0 +1,23 @@
+# Sử dụng một base image đã có sẵn với Node.js 16.16.0
+FROM node:16.16.0
+
+# Tạo thư mục làm việc trong container
+WORKDIR /usr/src/app/client
+
+# Sao chép package.json và package-lock.json vào thư mục làm việc
+COPY package*.json ./
+
+# Cài đặt các dependencies
+RUN npm install --legacy-peer-deps
+
+# Sao chép tệp .env vào thư mục làm việc
+COPY .env ./
+
+# Sao chép tất cả các file trong dự án vào thư mục làm việc
+COPY . .
+
+# Mở cổng mà ứng dụng Node.js lắng nghe (thay đổi nếu cần)
+EXPOSE 8080
+
+# Khởi chạy ứng dụng Node.js
+CMD ["npm", "run", "serve"]
